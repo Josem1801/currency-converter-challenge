@@ -9,7 +9,7 @@ yarn
 ```
 
 Antes de continuar, recuerda agregar las variables de entorno que se encuentrar en el archivo `env.example` en un nuevo archivo llamado `.env.local`
-> Puedes obtenerle en: https://www.fastforex.io/
+> Puedes obtenerlo en: https://www.fastforex.io/
 
 Listo! Puedes levantar el servidor corriendo:
 
