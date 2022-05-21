@@ -27,7 +27,7 @@ Abre [http://localhost:3000](http://localhost:3000) con tu navegador y listo!.
     .
     ├── src                     # Carpeta base
     │   ├── components          # Componentes de la aplicación
-    │   │   ├── ui              # Componentes de la sin logica 
+    │   │   ├── ui              # Componentes de la ui sin logica 
     │   ├── hooks               # Hooks personalizados
     │   ├── Layout              # Layout - Wrapper de estilos 
     │   ├── pages               # Paginas de la aplicación
