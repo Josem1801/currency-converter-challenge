@@ -2,14 +2,16 @@ import { Select } from 'components/ui/Select'
 import React, { ChangeEvent } from 'react'
 import { FlagContainer, RowCurrencyContainer } from './styles'
 import { Input } from 'components/ui/Input'
-import { Typography } from 'components/ui/Typography'
 import 'currency-flags/dist/currency-flags.css'
+import { Currency } from 'services/getCurrenciesList'
+import getObjectKeys from 'utils/getObjectKeys'
 interface RowCurrencyProps {
   handlePrice: (e: number) => void
   handleCurrency: (e: string) => void
-  options: string[]
+  options: Currency
   currentCurrency: string
   value: number
+  name: string
 }
 export default function RowCurrency({
   handlePrice,
@@ -17,12 +19,14 @@ export default function RowCurrency({
   currentCurrency,
   options,
   value,
+  name,
 }: RowCurrencyProps) {
   return (
     <RowCurrencyContainer>
-      <Typography fontVariant="large">Y</Typography>
       <Input
         type="text"
+        name={`input-${name}`}
+        aria-label={`input-${name}`}
         value={value}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handlePrice(Number(e.target.value) || 0)
@@ -33,14 +37,16 @@ export default function RowCurrency({
           className={`currency-flag currency-flag-${currentCurrency.toLowerCase()}`}
         />
         <Select
+          aria-label={`select-${name}`}
           value={currentCurrency}
+          name={`select-${name}`}
           onChange={(e: ChangeEvent<HTMLSelectElement>) =>
             handleCurrency(e.target.value)
           }
         >
-          {options.map((option) => (
+          {getObjectKeys(options).map((option) => (
             <option key={option} value={option}>
-              {option}
+              {options[option]}
             </option>
           ))}
         </Select>

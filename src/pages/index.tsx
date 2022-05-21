@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps<{
 const Home = ({
   currencies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(currencies)
   return (
     <Layout>
       <CurrencyConverter currencies={currencies} />

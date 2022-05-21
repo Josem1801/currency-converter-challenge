@@ -10,8 +10,10 @@ export default function useCurrencyPrice(
   const requestCurrencyPrice = useCallback(async () => {
     try {
       const res = await getCoupleCurrencyPrice(firstCurrency, secondCurrency)
-      setCurrentyPrice(res[getObjectKeys(res)[0]])
-    } catch (error) {}
+      setCurrentyPrice(res.result[getObjectKeys(res.result)[0]])
+    } catch (error) {
+      console.error(error)
+    }
   }, [firstCurrency, secondCurrency])
   useEffect(() => {
     requestCurrencyPrice()

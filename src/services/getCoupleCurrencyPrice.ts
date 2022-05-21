@@ -6,10 +6,10 @@ export default async function getCoupleCurrencyPrice(
 ) {
   try {
     const res = await requester.get(
-      `/live?source=${firstCurrency}&currencies=${secondCurrency}`
+      `/fetch-one?from=${firstCurrency}&to=${secondCurrency}`
     )
-    return res.data.quotes
+    return res.data
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }

@@ -5,10 +5,9 @@ export interface Currency {
 
 export default async function getCurrenciesList() {
   try {
-    const res = await requester.get('/list')
-    console.log(res.data)
+    const res = await requester.get('/currencies')
     return res.data.currencies
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }

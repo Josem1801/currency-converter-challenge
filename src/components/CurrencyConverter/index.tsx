@@ -1,14 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import RowCurrency from 'components/RowCurrency'
 import { Circle } from 'components/ui/Circle'
-import { Input } from 'components/ui/Input'
-import { Select } from 'components/ui/Select'
 import { Typography } from 'components/ui/Typography'
 import { UnderlineContainer } from 'components/ui/UnderlineContainer'
-import React, { ChangeEvent, useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Card } from './styles'
 import { BiTransfer } from 'react-icons/bi'
 import { Currency } from 'services/getCurrenciesList'
-import getObjectKeys from 'utils/getObjectKeys'
 import useCurrencyPrice from 'hooks/use-currency-price'
 import multiplyTwoNumbers from 'utils/multiplyTwoNumbers'
 import divideTwoNumbers from 'utils/divideTwoNumbers'
@@ -30,6 +28,7 @@ export default function CurrencyConverter({
     currency: 'MXN',
     value: 0,
   })
+
   const { currentPrice } = useCurrencyPrice(
     firstCurrency.currency,
     secondCurrency.currency
@@ -43,7 +42,7 @@ export default function CurrencyConverter({
         value: multiplyTwoNumbers(price, currentPrice),
       })
     },
-    [currentPrice, firstCurrency, secondCurrency]
+    [currentPrice, firstCurrency]
   )
   const handleSecondPrice = useCallback(
     (price: number) => {
@@ -53,29 +52,43 @@ export default function CurrencyConverter({
         value: divideTwoNumbers(price, currentPrice),
       })
     },
-    [currentPrice, firstCurrency, secondCurrency]
+    [currentPrice, secondCurrency]
   )
   //Currencies
   function handleFirstCurrency(currency: string) {
     setFirstCurrency({ ...firstCurrency, currency })
+    setSecondCurrency({
+      ...firstCurrency,
+      value: multiplyTwoNumbers(firstCurrency.value, currentPrice),
+    })
   }
   function handleSecondCurrency(currency: string) {
-    console.log(currency)
-    setSecondCurrency({ ...secondCurrency, currency })
+    setSecondCurrency({
+      ...secondCurrency,
+      currency,
+    })
   }
   function handleInvertCurrencies() {
-    setFirstCurrency({ ...firstCurrency, currency: secondCurrency.currency })
-    setSecondCurrency({ ...secondCurrency, currency: firstCurrency.currency })
+    const memory = firstCurrency
+    setFirstCurrency({ ...secondCurrency })
+    setSecondCurrency({ ...memory })
   }
+  useEffect(() => {
+    setSecondCurrency({
+      ...secondCurrency,
+      value: multiplyTwoNumbers(firstCurrency.value, currentPrice),
+    })
+  }, [currentPrice])
   return (
     <Card as="section">
       <UnderlineContainer as="header">
         <Typography fontVariant="large">Currency Converter</Typography>
       </UnderlineContainer>
       <RowCurrency
+        name="firstRowCurrency"
         value={firstCurrency.value}
         currentCurrency={firstCurrency.currency}
-        options={getObjectKeys(currencies)}
+        options={currencies}
         handlePrice={handleFirstPrice}
         handleCurrency={handleFirstCurrency}
       />
@@ -83,9 +96,10 @@ export default function CurrencyConverter({
         <BiTransfer className="icon__transfer" />
       </Circle>
       <RowCurrency
+        name="secondRowCurrency"
         value={secondCurrency.value}
         currentCurrency={secondCurrency.currency}
-        options={getObjectKeys(currencies)}
+        options={currencies}
         handlePrice={handleSecondPrice}
         handleCurrency={handleSecondCurrency}
       />

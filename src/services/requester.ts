@@ -6,4 +6,5 @@ const requester = axios.create({
     api_key: process.env.NEXT_PUBLIC_API_KEY,
   },
 })
+
 export default requester
