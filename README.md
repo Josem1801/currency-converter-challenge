@@ -20,7 +20,7 @@ yarn dev
 ```
 
 
-Abre [http://localhost:3000](http://localhost:3000) con tu navegador y listo!.
+Abre [http://localhost:3000](http://localhost:3000) con tu navegador y listo. Happy coding!.
 
 
 ### Estructura del proyecto
