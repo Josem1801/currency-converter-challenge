@@ -8,7 +8,10 @@ npm install
 yarn 
 ```
 
-- Puedes levantar el servidor corriendo:
+Antes de continuar, recuerda agregar las variables de entorno que se encuentrar en el archivo `env.example` en un nuevo archivo llamado `.env.local`
+> Puedes obtenerle en: https://www.fastforex.io/
+
+Listo! Puedes levantar el servidor corriendo:
 
 ```bash
 npm run dev
@@ -16,7 +19,6 @@ npm run dev
 yarn dev
 ```
 
-- Agregar las variables de entorno que se encuentrar en el archivo `env.example` en un nuevo archivo llamado `.env.local`
 
 Abre [http://localhost:3000](http://localhost:3000) con tu navegador y listo!.
 
