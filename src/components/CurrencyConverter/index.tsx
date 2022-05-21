@@ -42,7 +42,7 @@ export default function CurrencyConverter({
         value: multiplyTwoNumbers(price, currentPrice),
       })
     },
-    [currentPrice, firstCurrency]
+    [currentPrice]
   )
   const handleSecondPrice = useCallback(
     (price: number) => {
@@ -52,13 +52,13 @@ export default function CurrencyConverter({
         value: divideTwoNumbers(price, currentPrice),
       })
     },
-    [currentPrice, secondCurrency]
+    [currentPrice]
   )
   //Currencies
   function handleFirstCurrency(currency: string) {
     setFirstCurrency({ ...firstCurrency, currency })
     setSecondCurrency({
-      ...firstCurrency,
+      ...secondCurrency,
       value: multiplyTwoNumbers(firstCurrency.value, currentPrice),
     })
   }
